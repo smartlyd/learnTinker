@@ -19,6 +19,7 @@ package com.example.lee.learntinkerdemo.tinkerUtil.reporter;
 import android.content.Context;
 import android.os.Looper;
 import android.os.MessageQueue;
+import android.util.Log;
 
 import com.tencent.tinker.lib.reporter.DefaultLoadReporter;
 import com.tencent.tinker.lib.util.UpgradePatchRetry;
@@ -66,6 +67,7 @@ public class SampleLoadReporter extends DefaultLoadReporter {
     @Override
     public void onLoadException(Throwable e, int errorCode) {
         super.onLoadException(e, errorCode);
+        Log.e("dddd", "onLoadException: ",e );
         SampleTinkerReport.onLoadException(e, errorCode);
     }
 
@@ -85,6 +87,7 @@ public class SampleLoadReporter extends DefaultLoadReporter {
     @Override
     public void onLoadFileNotFound(File file, int fileType, boolean isDirectory) {
         super.onLoadFileNotFound(file, fileType, isDirectory);
+        Log.e("dddd", "file not found" );
         SampleTinkerReport.onLoadFileNotFound(fileType);
     }
 

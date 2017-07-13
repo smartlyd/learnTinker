@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
         Log.e(TAG, "this log is not called patch");
 //        Log.e(TAG, "this log is called patch");
-//        Log.e(TAG, "i am the patch");
     }
 
 

@@ -182,10 +182,10 @@ if (buildWithTinker()) {
              * if keepDexApply is true, class in which dex refer to the old apk.
              * open this can reduce the dex diff file size.
              */
-        //    keepDexApply = false
+            keepDexApply = false
 
             //时候使用加固
-          //  isProtectedApp = false
+            isProtectedApp = false
         }
 
         dex {
@@ -197,7 +197,7 @@ if (buildWithTinker()) {
                        "assets/secondary-dex-?.jar"]
             //此处设置一些不希望被修改的类
             loader = [
-                    "com.example.lee.learntinkerdemo.MyApplication"
+                     "com.example.lee.learntinkerdemo.MyApplication"
             ]
         }
 
