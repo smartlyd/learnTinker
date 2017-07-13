@@ -73,6 +73,7 @@ dependencies {
     provided('com.tencent.tinker:tinker-android-anno:1.7.11')
     //tinker的核心库
     compile('com.tencent.tinker:tinker-android-lib:1.7.11')
+    compile "com.android.support:multidex:1.0.1"
 }
 def bakPath = file("${buildDir}/bakApk/")
 
@@ -101,19 +102,15 @@ def releaseTime() {
 }
 
 ext {
-    //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?
     tinkerEnabled = true
-
-    //for normal build
-    //old apk file to build patch apk
-//    tinkerOldApkPath = "${bakPath}/app-debug-${releaseTime()}.apk"
-    tinkerOldApkPath = "${bakPath}/app-debug-0712-14-57-57.apk"
-    //proguard mapping file to build patch apk
+    /**
+     *    此处需要手动将前次打包时生成文件路径写好
+     *
+     *    warning： 如果只修改方法情况下 只更改old path 即可；如果 修改资源文件 则其余也需要修改
+     */
+    tinkerOldApkPath = "${bakPath}/app-debug-0713-10-12-43.apk"
     tinkerApplyMappingPath = "${bakPath}/app-debug-${releaseTime()}-mapping.txt"
-    //resource R.txt to build patch apk, must input if there is resource changed
     tinkerApplyResourcePath = "${bakPath}/app-debug-${releaseTime()}-R.txt"
-
-    //only use for build all flavor, if not, just ignore this field
     tinkerBuildFlavorDirectory = "${bakPath}/app-${releaseTime()}"
 }
 
@@ -238,6 +235,7 @@ if (buildWithTinker()) {
         //用于生成补丁包中的'package_meta.txt'文件
         packageConfig {
             //key value 方式读取
+            configField("TINKER_ID", "${getTinkerIdValue()}")
             configField("patchMessage", "tinker is sample to use")
 
             configField("platform", "all")

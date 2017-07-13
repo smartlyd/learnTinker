@@ -22,7 +22,7 @@ import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final String TAG = "MainActivity_TINKER";
+    private static final String TAG = "ddd";
     private Button btn, btn_show;
     private TextView tv;
 
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btn = (Button) findViewById(R.id.btn_load_jar);
         btn_show = (Button) findViewById(R.id.btn_show);
         tv = (TextView) findViewById(R.id.textview);
+        Log.d(TAG, "patch path = " + Environment.getExternalStorageDirectory().getAbsolutePath()+ "/patch_signed_7zip.apk");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Log.e(TAG, "this log is not called patch");
-        Log.e(TAG,"this log is called patch");
+//        Log.e(TAG, "this log is called patch");
+//        Log.e(TAG, "i am the patch");
     }
 
 

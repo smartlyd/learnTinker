@@ -3,10 +3,20 @@ package com.example.lee.learntinkerdemo;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.multidex.MultiDex;
 
+import com.example.lee.learntinkerdemo.tinkerUtil.MyLogImp;
+import com.example.lee.learntinkerdemo.tinkerUtil.util.TinkerManager;
 import com.tencent.tinker.anno.DefaultLifeCycle;
+import com.tencent.tinker.lib.listener.DefaultPatchListener;
+import com.tencent.tinker.lib.listener.PatchListener;
+import com.tencent.tinker.lib.patch.AbstractPatch;
+import com.tencent.tinker.lib.patch.UpgradePatch;
+import com.tencent.tinker.lib.reporter.DefaultPatchReporter;
+import com.tencent.tinker.lib.reporter.LoadReporter;
+import com.tencent.tinker.lib.reporter.PatchReporter;
+import com.tencent.tinker.lib.service.DefaultTinkerResultService;
+import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
@@ -41,9 +51,20 @@ public class MyApplicationLike extends DefaultApplicationLike {
     public void onBaseContextAttached(Context base) {
         super.onBaseContextAttached(base);
         MultiDex.install(base);
-        TinkerInstaller.install(this);
-        //在初始化的时候调用加载补丁的方法,路径是实际补丁放的位置
-      //  TinkerInstaller.onReceiveUpgradePatch(this.getApplication(), Environment.getExternalStorageDirectory().getAbsolutePath()+"/patch_signed_7zip.apk");
+
+        TinkerManager.setTinkerApplicationLike(this);
+
+        TinkerManager.initFastCrashProtect();
+        //should set before tinker is installed
+        TinkerManager.setUpgradeRetryEnable(true);
+
+        //optional set logIml, or you can use default debug log
+        TinkerInstaller.setLogIml(new MyLogImp());
+
+        //installTinker after load multiDex
+        //or you can put com.tencent.tinker.** to main dex
+        TinkerManager.installTinker(this);
+        Tinker tinker = Tinker.with(getApplication());
     }
 
     public static Context getContext(){
