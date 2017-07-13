@@ -19,11 +19,13 @@ package com.example.lee.learntinkerdemo.tinkerUtil.reporter;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.lee.learntinkerdemo.BuildInfo;
 import com.example.lee.learntinkerdemo.tinkerUtil.crash.SampleUncaughtExceptionHandler;
 import com.example.lee.learntinkerdemo.tinkerUtil.util.Utils;
 import com.tencent.tinker.lib.listener.DefaultPatchListener;
+import com.tencent.tinker.lib.service.TinkerPatchService;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerLoadResult;
 import com.tencent.tinker.lib.util.TinkerLog;
@@ -43,7 +45,7 @@ import java.util.Properties;
  * such as we can check rom space or apk channel
  */
 public class SamplePatchListener extends DefaultPatchListener {
-    private static final String TAG = "Tinker.SamplePatchListener";
+    private static final String TAG = "dddd";
 
     protected static final long NEW_PATCH_RESTRICTION_SPACE_SIZE_MIN = 60 * 1024 * 1024;
 
@@ -68,7 +70,7 @@ public class SamplePatchListener extends DefaultPatchListener {
         File patchFile = new File(path);
         TinkerLog.i(TAG, "receive a patch file: %s, file size:%d", path, SharePatchFileUtil.getFileOrDirectorySize(patchFile));
         int returnCode = super.patchCheck(path);
-
+        Log.d(TAG, "start"+returnCode);
         if (returnCode == ShareConstants.ERROR_PATCH_OK) {
             returnCode = Utils.checkForPatchRecover(NEW_PATCH_RESTRICTION_SPACE_SIZE_MIN, maxMemory);
         }
@@ -98,7 +100,7 @@ public class SamplePatchListener extends DefaultPatchListener {
             //check whether retry so many times
             if (returnCode == ShareConstants.ERROR_PATCH_OK) {
                 returnCode = UpgradePatchRetry.getInstance(context).onPatchListenerCheck(patchMd5)
-                    ? ShareConstants.ERROR_PATCH_OK : Utils.ERROR_PATCH_RETRY_COUNT_LIMIT;
+                        ? ShareConstants.ERROR_PATCH_OK : Utils.ERROR_PATCH_RETRY_COUNT_LIMIT;
             }
         }
         // Warning, it is just a sample case, you don't need to copy all of these
@@ -116,8 +118,21 @@ public class SamplePatchListener extends DefaultPatchListener {
                 }
             }
         }
-
+        Log.d(TAG, "end"+returnCode);
         SampleTinkerReport.onTryApply(returnCode == ShareConstants.ERROR_PATCH_OK);
+        return returnCode;
+    }
+
+
+    @Override
+    public int onPatchReceived(String path) {
+        int returnCode = patchCheck(path);
+        Log.d(TAG, "onPatchReceived"+returnCode);
+        if (returnCode == ShareConstants.ERROR_PATCH_OK) {
+            TinkerPatchService.runPatchService(context, path);
+        } else {
+            Tinker.with(context).getLoadReporter().onLoadPatchListenerReceiveFail(new File(path), returnCode);
+        }
         return returnCode;
     }
 }

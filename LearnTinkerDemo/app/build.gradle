@@ -70,9 +70,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     //可选，用于生成application类
-    provided('com.tencent.tinker:tinker-android-anno:1.7.7')
+    provided('com.tencent.tinker:tinker-android-anno:1.7.11')
     //tinker的核心库
-    compile('com.tencent.tinker:tinker-android-lib:1.7.7')
+    compile('com.tencent.tinker:tinker-android-lib:1.7.11')
     compile "com.android.support:multidex:1.0.1"
 }
 def bakPath = file("${buildDir}/bakApk/")
@@ -108,7 +108,7 @@ ext {
      *
      *    warning： 如果只修改方法情况下 只更改old path 即可；如果 修改资源文件 则其余也需要修改
      */
-    tinkerOldApkPath = "${bakPath}/app-debug-0713-11-21-49.apk"
+    tinkerOldApkPath = "${bakPath}/app-debug-0713-15-14-50.apk"
     tinkerApplyMappingPath = "${bakPath}/app-debug-${releaseTime()}-mapping.txt"
     tinkerApplyResourcePath = "${bakPath}/app-debug-${releaseTime()}-R.txt"
     tinkerBuildFlavorDirectory = "${bakPath}/app-${releaseTime()}"
@@ -182,10 +182,10 @@ if (buildWithTinker()) {
              * if keepDexApply is true, class in which dex refer to the old apk.
              * open this can reduce the dex diff file size.
              */
-        //    keepDexApply = false
+//            keepDexApply = false
 
             //时候使用加固
-          //  isProtectedApp = false
+//            isProtectedApp = false
         }
 
         dex {

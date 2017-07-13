@@ -1,11 +1,14 @@
 package com.example.lee.learntinkerdemo;
 
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.multidex.MultiDex;
 
 import com.example.lee.learntinkerdemo.tinkerUtil.MyLogImp;
+import com.example.lee.learntinkerdemo.tinkerUtil.util.SampleApplicationContext;
 import com.example.lee.learntinkerdemo.tinkerUtil.util.TinkerManager;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.lib.listener.DefaultPatchListener;
@@ -52,6 +55,8 @@ public class MyApplicationLike extends DefaultApplicationLike {
         super.onBaseContextAttached(base);
         MultiDex.install(base);
 
+        SampleApplicationContext.application = getApplication();
+        SampleApplicationContext.context = getApplication();
         TinkerManager.setTinkerApplicationLike(this);
 
         TinkerManager.initFastCrashProtect();
@@ -72,5 +77,10 @@ public class MyApplicationLike extends DefaultApplicationLike {
     }
     public static Application getMyApp() {
         return myApp;
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public void registerActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks callback) {
+        getApplication().registerActivityLifecycleCallbacks(callback);
     }
 }
