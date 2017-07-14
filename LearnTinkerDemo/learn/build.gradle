@@ -63,6 +63,14 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    productFlavors {
+        //多渠道打包的渠道ID
+        pxkj { //屏芯科技
+        }
+        meituan { //美团
+        }
+
+    }
 }
 
 ext {
@@ -78,7 +86,7 @@ ext {
     tinkerApplyResourcePath = "${bakPath}/app-debug-1018-17-32-47-R.txt"
 
     //only use for build all flavor, if not, just ignore this field
-    tinkerBuildFlavorDirectory = "${bakPath}/app-1018-17-32-47"
+    tinkerBuildFlavorDirectory = "${bakPath}/learn-0714-14-41-54"
 }
 ext{
     TINKER_ID = "${getTinkerIdValue()}"
