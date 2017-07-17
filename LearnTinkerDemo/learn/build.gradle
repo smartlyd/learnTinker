@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 def bakPath = file("${buildDir}/bakApk/")
+
 def gitSha() {
     try {
         String gitRev = 'git rev-parse --short HEAD'.execute(null, project.rootDir).text.trim()
@@ -44,7 +45,7 @@ android {
         multiDexEnabled true
         buildConfigField "String", "MESSAGE", "\"I am the base apk\""
         buildConfigField "String", "TINKER_ID", "\"${getTinkerIdValue()}\""
-        buildConfigField "String", "PLATFORM",  "\"all\""
+        buildConfigField "String", "PLATFORM", "\"all\""
     }
     buildTypes {
         release {
@@ -88,7 +89,7 @@ ext {
     //only use for build all flavor, if not, just ignore this field
     tinkerBuildFlavorDirectory = "${bakPath}/learn-0714-14-41-54"
 }
-ext{
+ext {
     TINKER_ID = "${getTinkerIdValue()}"
 }
 
@@ -121,12 +122,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
     compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     provided("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:multidex:1.0.1'
-    compile "com.android.support:appcompat-v7:23.1.1"
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    testCompile 'junit:junit:4.12'
 }
 if (buildWithTinker()) {
     apply plugin: 'com.tencent.tinker.patch'
@@ -154,7 +155,6 @@ if (buildWithTinker()) {
 
 
             tinkerId = getTinkerIdValue()
-
 
 //            keepDexApply = false
 //
@@ -214,7 +214,7 @@ if (buildWithTinker()) {
     }
 
     List<String> flavors = new ArrayList<>();
-    project.android.productFlavors.each {flavor ->
+    project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }
     boolean hasFlavors = flavors.size() > 0
