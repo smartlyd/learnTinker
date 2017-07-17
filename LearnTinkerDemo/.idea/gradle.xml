@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/learn" />
+            <option value="$PROJECT_DIR$/myjava" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
