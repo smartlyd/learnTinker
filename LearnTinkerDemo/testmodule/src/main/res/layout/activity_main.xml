@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_ground"
-    tools:context="com.example.lee.learn.SplashActivity">
+    tools:context="com.example.lee.testmodule.MainActivity">
 
 
     <ListView
@@ -19,7 +19,7 @@
         android:listSelector="@null"
         android:scrollbars="none"/>
 
-    <com.example.lee.learn.widget.LinkScrollListView
+    <com.example.lee.testmodule.widget.LinkScrollListView
         android:id="@+id/linkList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +29,27 @@
         android:divider="@color/colorPrimary"
         android:dividerHeight="1dp"
         android:fadingEdge="none"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        android:visibility="visible"/>
+
+    <com.example.lee.testmodule.widget.LinkScrollGridView
+        android:id="@+id/linkGrid"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/listType"
+        android:background="@null"
+        android:cacheColorHint="#00000000"
+        android:numColumns="2"
+        android:visibility="gone"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/listType"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

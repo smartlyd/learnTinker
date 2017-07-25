@@ -8,8 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/learn" />
             <option value="$PROJECT_DIR$/myjava" />
+            <option value="$PROJECT_DIR$/testmodule" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

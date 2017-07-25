@@ -1,2 +1,2 @@
-include ':learn', ':myjava'
+include  ':myjava', ':testmodule'
 
