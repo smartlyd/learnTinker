@@ -1,13 +1,12 @@
 package com.example.lee.testmodule;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -52,10 +51,8 @@ public class MainActivity extends AppCompatActivity {
         contentAdapter = new ContentAdapter(getApplicationContext(), content);
 
 
-        layoutManager = new GridLayoutManager(getApplicationContext(),2,GridLayoutManager.VERTICAL,false);
+        layoutManager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
         recycleview.setLayoutManager(layoutManager);
-
-
 
 
 //        TestListBean.Inner inner = new TestListBean.Inner();
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             List<TestListBean.Inner> inners = new ArrayList<>();
             listBean.setId(i);
             listBean.setType("fff" + i + "type");
-            for (int j = 0; j < 15; j++) {
+            for (int j = 0; j < 60; j++) {
                 TestListBean.Inner inner = new TestListBean.Inner();
                 inner.setId(j);
                 inner.setName("abc" + j);
