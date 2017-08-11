@@ -1,8 +1,11 @@
 package com.example;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -117,32 +120,30 @@ public class MyClass {
 //        };
 //        Collections.sort(list2, com);
 //        System.out.println(new Gson().toJson(list2));
-
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            strings.add(i + "");
-        }
-        strings.add("aaa");
-        strings.add("bbb");
-        strings.add("ccc");
-        strings.add("ddd");
-        strings.add("eee");
-        strings.add("fff");
-        strings.add("mmm");
-        int j = 0;
-        for (int i = 0; i < strings.size(); i++) {
-            if(strings.get(i).equals("bbb")){
-                strings.set(i,"mmm");
-                continue;
-            }
-            if(strings.get(i).equals("mmm")){
-                j++;
-            }
-        }
-        System.out.println(j);
+        System.out.println(getStartTime());
+        System.out.println(System.currentTimeMillis());
+        System.out.println(timeToDateStrLin(getStartTime()));
 
     }
+    public static String timeToDateStrLin(long time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        String format = sdf.format(new Date(time));
+        String[] split = format.split(" ");
+        if (split != null && split.length == 2) {
+            format = split[0] + "\n" + split[1];
+        }
+        return format;
+    }
 
+    public static long getStartTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Date start = calendar.getTime();
+        return start.getTime();
+    }
     public static void myprint(List<TestD> list) {
         Iterator it = list.iterator(); // 得到迭代器，用于遍历list中的所有元素
         while (it.hasNext()) {// 如果迭代器中有元素，则返回true

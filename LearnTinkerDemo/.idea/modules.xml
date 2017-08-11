@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LearnTinkerDemo.iml" filepath="$PROJECT_DIR$/LearnTinkerDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lee_annotation/lee_annotation.iml" filepath="$PROJECT_DIR$/lee_annotation/lee_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lee_api/lee_api.iml" filepath="$PROJECT_DIR$/lee_api/lee_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lee_compile/lee_compile.iml" filepath="$PROJECT_DIR$/lee_compile/lee_compile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lee_sample/lee_sample.iml" filepath="$PROJECT_DIR$/lee_sample/lee_sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/myjava/myjava.iml" filepath="$PROJECT_DIR$/myjava/myjava.iml" />
       <module fileurl="file://$PROJECT_DIR$/testmodule/testmodule.iml" filepath="$PROJECT_DIR$/testmodule/testmodule.iml" />
     </modules>
