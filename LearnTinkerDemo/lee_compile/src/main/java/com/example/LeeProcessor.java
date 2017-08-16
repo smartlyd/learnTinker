@@ -1,17 +1,20 @@
 package com.example;
 
 
+import com.google.auto.service.AutoService;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -27,68 +30,62 @@ import javax.tools.JavaFileObject;
  *         annotaition processor
  */
 
+@AutoService(Processor.class)
 public class LeeProcessor extends AbstractProcessor {
-    /**
-     * 文件相关辅助类
-     * 用于生成javasourcecode
-     */
-    private Filer mFiler;
-    /**
-     * - VariableElement //一般代表成员变量
-     * - ExecutableElement //一般代表类中的方法
-     * - TypeElement //一般代表代表类
-     * - PackageElement //一般代表Package
-     */
-    private Elements element;
-    /**
-     * 日志相关辅助类
-     */
     private Messager messager;
-
-
-    private Map<String, ProxyInfo> mProxyMap = new HashMap<>();
+    private Elements elementUtils;
+    private Map<String, ProxyInfo> mProxyMap = new HashMap<String, ProxyInfo>();
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnvironment) {
-        super.init(processingEnvironment);
-        mFiler = processingEnvironment.getFiler();
-        messager = processingEnvironment.getMessager();
-        element = processingEnvironment.getElementUtils();
+    public synchronized void init(ProcessingEnvironment processingEnv)
+    {
+        super.init(processingEnv);
+
+        messager = processingEnv.getMessager();
+        elementUtils = processingEnv.getElementUtils();
     }
 
     @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        Set<String> set = new LinkedHashSet<>();
-        set.add(BindView.class.getCanonicalName());
-        return set;
+    public Set<String> getSupportedAnnotationTypes()
+    {
+        HashSet<String> supportTypes = new LinkedHashSet<>();
+        supportTypes.add(BindView.class.getCanonicalName());
+        return supportTypes;
     }
 
     @Override
-    public SourceVersion getSupportedSourceVersion() {
+    public SourceVersion getSupportedSourceVersion()
+    {
         return SourceVersion.latestSupported();
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)
+    {
+        messager.printMessage(Diagnostic.Kind.NOTE , "process...");
         mProxyMap.clear();
-        Set<? extends Element> elements = roundEnvironment.getElementsAnnotatedWith(BindView.class);
-        for (Element e : elements) {
-            if (!checkAnnotationUseValid(e,BindView.class))
-                return false;
-            //field type
+
+        Set<? extends Element> elesWithBindView = roundEnv.getElementsAnnotatedWith(BindView.class);
+        for (Element element : elesWithBindView)
+        {
+            checkAnnotationValid(element, BindView.class);
+
             VariableElement variableElement = (VariableElement) element;
             //class type
-            TypeElement typeElement = (TypeElement) variableElement.getEnclosingElement();//TypeElement
-            String qualifiedName = typeElement.getQualifiedName().toString();
+            TypeElement classElement = (TypeElement) variableElement.getEnclosingElement();
+            //full class name
+            String fqClassName = classElement.getQualifiedName().toString();
 
-            ProxyInfo proxyInfo = mProxyMap.get(qualifiedName);
-            if (proxyInfo == null){
-                proxyInfo = new ProxyInfo(element, typeElement);
-                mProxyMap.put(qualifiedName, proxyInfo);
+            ProxyInfo proxyInfo = mProxyMap.get(fqClassName);
+            if (proxyInfo == null)
+            {
+                proxyInfo = new ProxyInfo(elementUtils, classElement);
+                mProxyMap.put(fqClassName, proxyInfo);
             }
-            BindView annotation = variableElement.getAnnotation(BindView.class);
-            int id = annotation.value();
-            proxyInfo.injectVariables.put(id, variableElement);
+
+            BindView BindViewAnnotation = variableElement.getAnnotation(BindView.class);
+            int id = BindViewAnnotation.value();
+            proxyInfo.injectVariables.put(id , variableElement);
         }
 
         for (String key : mProxyMap.keySet())
@@ -111,11 +108,11 @@ public class LeeProcessor extends AbstractProcessor {
             }
 
         }
-
         return true;
     }
 
-    private boolean checkAnnotationUseValid(Element annotatedElement,Class clazz) {
+    private boolean checkAnnotationValid(Element annotatedElement, Class clazz)
+    {
         if (annotatedElement.getKind() != ElementKind.FIELD)
         {
             error(annotatedElement, "%s must be declared on field.", clazz.getSimpleName());

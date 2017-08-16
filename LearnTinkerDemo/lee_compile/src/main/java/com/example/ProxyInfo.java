@@ -39,11 +39,11 @@ public class ProxyInfo {
     public String generateJavaCode() {
         StringBuilder sb = new StringBuilder();
         sb.append("//Generated JavaCode.Do not modify!\n");
-        sb.append("package").append(packageName).append(";\n\n");
-        sb.append("import com.example.lee.*;\n");
+        sb.append("package ").append(packageName).append(";\n\n");
+        sb.append("import com.example.lee.lee_api.*;\n");
         sb.append("\n");
-        sb.append("public class").append(proxyClassName).
-                append("implements").append(ProxyInfo.PROXY)
+        sb.append("public class ").append(proxyClassName).
+                append(" implements ").append(ProxyInfo.PROXY)
                 .append("<").append(typeElement.getQualifiedName()).append(">");
         sb.append("{\n");
         generateMethods(sb);

@@ -29,8 +29,6 @@ dependencies {
     })
     compile project(':lee_api')
     apt project(':lee_compile')
-    //apt project(':lee_annotation')
-    compile project(path: ':lee_annotation')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:26.+'

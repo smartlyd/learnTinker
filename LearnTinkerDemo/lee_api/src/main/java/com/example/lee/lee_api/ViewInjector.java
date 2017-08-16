@@ -10,6 +10,16 @@ import android.view.View;
 public class ViewInjector {
     private static final String SUFFIX = "$$ViewInject";
 
+    public static void injectView(Activity activity) {
+        ViewInject proxyActivity = findProxyActivity(activity);
+        proxyActivity.inject(activity, activity);
+    }
+
+    public static void injectView(Object object, View view) {
+        ViewInject proxyActivity = findProxyActivity(object);
+        proxyActivity.inject(object, view);
+    }
+
     private static ViewInject findProxyActivity(Object activity) {
         try {
             Class clazz = activity.getClass();
@@ -23,18 +33,6 @@ public class ViewInjector {
             e.printStackTrace();
         }
         throw new RuntimeException(String.format("can not find %s , something when compiler.", activity.getClass().getSimpleName() + SUFFIX));
-    }
-
-    public static void injectView(Activity activity)
-    {
-        ViewInject proxyActivity = findProxyActivity(activity);
-        proxyActivity.inject(activity, activity);
-    }
-
-    public static void injectView(Object object, View view)
-    {
-        ViewInject proxyActivity = findProxyActivity(object);
-        proxyActivity.inject(object, view);
     }
 
 
