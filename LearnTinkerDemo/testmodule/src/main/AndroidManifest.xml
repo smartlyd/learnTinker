@@ -14,21 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
         </activity>
         <activity android:name="com.example.lee.AboutDeviceActivity">
+
+        </activity>
+        <activity android:name="com.example.lee.loadWidget.SampleActivity">
+        </activity>
+        <activity android:name="com.example.lee.loadWidget.IndicatorActivity"/>
+        <activity android:name="com.example.lee.loadWidget.Main2Activity">
+        </activity>
+        <activity android:name="com.example.lee.SpalshActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name="com.example.lee.loadWidget.SampleActivity">
-
-        </activity>
-        <activity android:name="com.example.lee.loadWidget.IndicatorActivity"/>
-        <activity android:name="com.example.lee.loadWidget.Main2Activity">
-
         </activity>
     </application>
 
