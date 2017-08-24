@@ -1,2 +1,3 @@
-include ':myjava', ':testmodule', ':lee_annotation', ':lee_compile', ':lee_api', ':lee_sample'
+include ':myjava', ':testmodule'
+//include ':lee_annotation', ':lee_compile', ':lee_api', ':lee_sample'
 

@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.lee.mvp.IView;
+import com.example.lee.mvp.MyPresenter;
 import com.example.lee.spalshview.FormView;
 import com.example.lee.spalshview.MyVideoView;
 import com.example.lee.testmodule.R;
@@ -25,7 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SpalshActivity extends AppCompatActivity implements View.OnClickListener {
+public class SpalshActivity extends AppCompatActivity implements View.OnClickListener, IView {
 
 
     public static final String VIDEO_NAME = "welcome.mp4";
@@ -39,7 +41,8 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
     private FormView formView;
 
 
-    private TextView appName;
+    private TextView appName, tv_presenter;
+    private MyPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
         playVideo(videoFile);
 
         playAnim();
+
     }
 
     private void findView() {
@@ -76,18 +80,21 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
         buttonRight = (Button) findViewById(R.id.buttonRight);
         formView = (FormView) findViewById(R.id.formView);
         appName = (TextView) findViewById(R.id.appName);
+        tv_presenter = (TextView) findViewById(R.id.tv_presenter);
 
         formView.post(new Runnable() {
             @Override
             public void run() {
-                int delta = formView.getTop()+formView.getHeight();
+                int delta = formView.getTop() + formView.getHeight();
                 formView.setTranslationY(-1 * delta);
             }
         });
     }
 
     private void initView() {
+        presenter = new MyPresenter();
 
+        presenter.setiView(this);
         buttonRight.setOnClickListener(this);
         buttonLeft.setOnClickListener(this);
     }
@@ -105,7 +112,7 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void playAnim() {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(appName, "alpha", 0,1);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(appName, "alpha", 0, 1);
         anim.setDuration(4000);
         anim.setRepeatCount(1);
         anim.setRepeatMode(ObjectAnimator.REVERSE);
@@ -114,6 +121,20 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onAnimationEnd(Animator animation) {
                 appName.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    private void playAnim2() {
+        ObjectAnimator anim = ObjectAnimator.ofFloat(tv_presenter, "alpha", 0, 1);
+        anim.setDuration(4000);
+        anim.setRepeatCount(1);
+        anim.setRepeatMode(ObjectAnimator.REVERSE);
+        anim.start();
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                tv_presenter.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -149,7 +170,7 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        int delta = formView.getTop()+formView.getHeight();
+        int delta = formView.getTop() + formView.getHeight();
         switch (inputType) {
             case NONE:
 
@@ -176,6 +197,10 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
                 inputType = InputType.NONE;
                 buttonLeft.setText(R.string.button_login);
                 buttonRight.setText(R.string.button_signup);
+
+                presenter.requestDate();
+
+
                 break;
             case SIGN_UP:
 
@@ -190,6 +215,12 @@ public class SpalshActivity extends AppCompatActivity implements View.OnClickLis
                 buttonRight.setText(R.string.button_signup);
                 break;
         }
+    }
+
+    @Override
+    public void updateView(String str) {
+        tv_presenter.setText(str);
+        playAnim2();
     }
 
     enum InputType {
