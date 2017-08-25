@@ -13,10 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
         <activity android:name="com.example.lee.AboutDeviceActivity">
-
         </activity>
         <activity android:name="com.example.lee.loadWidget.SampleActivity">
         </activity>
@@ -24,6 +21,13 @@
         <activity android:name="com.example.lee.loadWidget.Main2Activity">
         </activity>
         <activity android:name="com.example.lee.SpalshActivity">
+
+        </activity>
+        <activity android:name="com.example.lee.route.TestRouteActivity">
+        </activity>
+        <activity android:name="com.example.lee.route.TestRouteActivity2">
+        </activity>
+        <activity android:name="com.example.lee.route.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
