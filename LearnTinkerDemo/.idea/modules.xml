@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LearnTinkerDemo.iml" filepath="$PROJECT_DIR$/LearnTinkerDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/myjava/myjava.iml" filepath="$PROJECT_DIR$/myjava/myjava.iml" />
       <module fileurl="file://$PROJECT_DIR$/route/route.iml" filepath="$PROJECT_DIR$/route/route.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tarchitecturemodule/tarchitecturemodule.iml" filepath="$PROJECT_DIR$/tarchitecturemodule/tarchitecturemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/testmodule/testmodule.iml" filepath="$PROJECT_DIR$/testmodule/testmodule.iml" />
     </modules>
   </component>

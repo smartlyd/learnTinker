@@ -1,6 +1,8 @@
 package com.example;
 
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,120 +13,30 @@ import java.util.List;
 
 public class MyClass {
 
-    public static void main(String[] args) {
-//        List<TestD> l = new ArrayList<>();
-//
-//        TestD d = new TestD();
-//        d.setName("abc");
-//        d.setCode("def");
-//        l.add(d);
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("lhc");
-//        l.add(d);
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("dmq");
-//        l.add(d);
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("lbb");
-//        l.add(d);
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("mq");
-//        l.add(d);
-//
-//
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("hmq");
-//        l.add(d);
-//
-//
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("abmq");
-//        l.add(d);
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("bcmq");
-//        l.add(d);
-//        d = new TestD();
-//        d.setName("cba");
-//        d.setCode("amqb");
-//        l.add(d);
-//        System.out.println("================");
-//        FilterFoodSorter sorter = new FilterFoodSorter();
-//        List<TestD> ml = new ArrayList<>();
-//        sorter.setFilter("mq");
-//        for (int i = 0; i < l.size(); i++) {
-//            if (sorter.checkFood(l.get(i))) {
-//                ml.add(l.get(i));
-//            }
-//        }
-//        Comparator<TestD> codeSorter = new Comparator<TestD>() {
-//
-//            @Override
-//            public int compare(TestD o1, TestD o2) {
-//                return o1.getCode().(o2.getCode());
-//            }
-//
-//            @Override
-//            public String toString() {
-//                return "按助记码";
-//            }
-//        };
-//
-//        sorter.setFoodSorter(codeSorter);
-//        TestD[] mdatas = ml.toArray(new TestD[ml.size()]);
-////        Arrays.sort(mdatas, sorter);
-//        Collections.sort(ml, sorter);
-//        myprint(l);
-
-//        Map<String, String> map = new HashMap<>();
-//        map.put("aaa", "bbb");
-//        System.out.println(map.size());
-//        map.clear();
-//        System.out.println(map.size());
-//        String a ;
-//        String b = "a";
-//        System.out.println(b.equals(""));
-
-//
-//        List<TestD> list = new ArrayList<>();
-//        List<TestD> list2 = new ArrayList<>();
-//
-//        TestD d1 = new TestD(111, "bbb", 1);
-//        TestD d2 = new TestD(222, "bbb", 1);
-//        TestD d3 = new TestD(333, "bbb", 1);
-//        TestD d4 = new TestD(123, "fff", 12);
-//
-//        list.add(d1);
-//
-//        list2.add(d2);
-//        list2.add(d1);
-//        list2.add(d3);
-//        list2.add(d4);
-//
-//        Comparator<TestD> com = new Comparator<TestD>() {
-//            @Override
-//            public int compare(TestD d1, TestD d2) {
-//                if (d1.getCode() > d2.getCode()) {
-//                    return -1;
-//                } else if (d1.getCode() < d2.getCode()) {
-//                    return 1;
-//                } else
-//                    return 0;
-//            }
-//        };
-//        Collections.sort(list2, com);
-//        System.out.println(new Gson().toJson(list2));
-        System.out.println(getStartTime());
-        System.out.println(System.currentTimeMillis());
-        System.out.println(timeToDateStrLin(getStartTime()));
-
+    public enum Color {
+        RED,
+        BLUD,
+        GREEN
     }
+
+    public static void main(String[] args) {
+        List<TestD> list = new ArrayList<>();
+        TestD d = new TestD(1, "a", 1);
+        list.add(d);
+        d = new TestD(2, "b", 2);
+        list.add(d);
+        d = new TestD(3, "c", 3);
+        list.add(d);
+        for (TestD t : list) {
+            if(t.getName().equals("b")){
+                TestD temp = new TestD(4,"abc",4);
+                t = temp;
+            }
+        }
+
+        System.out.println(new Gson().toJson(list));
+    }
+
     public static String timeToDateStrLin(long time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         String format = sdf.format(new Date(time));
@@ -144,6 +56,7 @@ public class MyClass {
         Date start = calendar.getTime();
         return start.getTime();
     }
+
     public static void myprint(List<TestD> list) {
         Iterator it = list.iterator(); // 得到迭代器，用于遍历list中的所有元素
         while (it.hasNext()) {// 如果迭代器中有元素，则返回true
