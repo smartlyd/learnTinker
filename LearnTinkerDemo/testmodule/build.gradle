@@ -27,10 +27,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':route')
+
+
+
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     testCompile 'junit:junit:4.12'
-
-
 }

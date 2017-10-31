@@ -17,6 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="判断是否是手机:"
+            android:ellipsize="end"
+            android:maxEms="6"
+            android:singleLine="true"
             android:textSize="16sp"/>
 
         <TextView

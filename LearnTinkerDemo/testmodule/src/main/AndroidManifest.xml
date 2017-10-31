@@ -14,25 +14,40 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.lee.AboutDeviceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name="com.example.lee.loadWidget.SampleActivity">
+
         </activity>
         <activity android:name="com.example.lee.loadWidget.IndicatorActivity"/>
         <activity android:name="com.example.lee.loadWidget.Main2Activity">
+
         </activity>
         <activity android:name="com.example.lee.SpalshActivity">
-
         </activity>
         <activity android:name="com.example.lee.route.TestRouteActivity">
         </activity>
         <activity android:name="com.example.lee.route.TestRouteActivity2">
         </activity>
         <activity android:name="com.example.lee.route.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name="com.example.lee.TestWxActivity">
+
+        </activity>
+        <activity
+            android:name="com.example.lee.wxapi.WXEntryActivity"
+            android:exported="true">
         </activity>
     </application>
 

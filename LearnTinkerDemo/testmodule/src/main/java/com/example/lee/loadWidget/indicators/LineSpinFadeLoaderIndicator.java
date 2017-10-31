@@ -13,7 +13,7 @@ public class LineSpinFadeLoaderIndicator extends BallSpinFadeLoaderIndicator {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-        float radius=getWidth()/10;
+        float radius=getWidth()/20;
         for (int i = 0; i < 8; i++) {
             canvas.save();
             Point point=circleAt(getWidth(),getHeight(),getWidth()/2.5f-radius,i*(Math.PI/4));

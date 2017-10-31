@@ -16,7 +16,6 @@
             android:id="@+id/rcl_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/fragmet_girl_list_item"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 

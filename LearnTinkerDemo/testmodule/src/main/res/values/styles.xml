@@ -34,5 +34,30 @@
         <item name="indicatorName">BallPulseIndicator</item>
     </style>
 
+    <!-- 自定义tab-->
+    <declare-styleable name="PagerSlidingTabStrip">
+        <!--滑动条的颜色-->
+        <attr name="pstsIndicatorColor" format="color" />
+        <!-- 滑动条所在的那个全宽线的颜色-->
+        <attr name="pstsUnderlineColor" format="color" />
+        <!-- 每个标签分割线的颜色-->
+        <attr name="pstsDividerColor" format="color" />
+        <!-- 滑动条的高度-->
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <!-- 滑动条所在的那个全宽线的高度-->
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <!-- 分割线底部和顶部填充的宽度-->
+        <attr name="pstsDividerPadding" format="dimension" />
+        <!-- 每个标签左右填充宽度-->
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <!-- -->
+        <attr name="pstsScrollOffset" format="dimension" />
+        <!-- 每个标签的背景，应该为StateListDrawable-->
+        <attr name="pstsTabBackground" format="reference" />
+        <!-- 如果为true ,每个标签是相同的控件，平均分整个屏幕，默认是 false-->
+        <attr name="pstsShouldExpand" format="boolean" />
+        <!-- 如果为 true,标签都是大写字母-->
+        <attr name="pstsTextAllCaps" format="boolean" />
+    </declare-styleable>
 
 </resources>

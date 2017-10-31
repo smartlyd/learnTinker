@@ -28,7 +28,9 @@ public class IndicatorActivity extends AppCompatActivity{
         BallSpinFadeLoaderIndicator indicator1 = new BallSpinFadeLoaderIndicator();
 //        avi.setIndicatorColor(R.color.colorAccent);
 //        avi.setIndicator(indicator1);
+        avi.setIndicator(indicator);
     }
+
 
     public void hideClick(View view) {
         avi.hide();
