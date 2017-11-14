@@ -1,18 +1,23 @@
 package com.example.lee;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.lee.spalshview.MyView;
 import com.example.lee.testmodule.R;
 import com.example.lee.utils.PhoneUtil;
 
-public class AboutDeviceActivity extends AppCompatActivity {
+public class AboutDeviceActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final String TAG = "dddddd";
     private TextView tv_isphone, tv_getimei, tv_getimsi, tv_getversion, tv_getandroidId, tv_getproducer, tv_gettype;
+
+    private MyView myview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,9 @@ public class AboutDeviceActivity extends AppCompatActivity {
         tv_getandroidId = (TextView) findViewById(R.id.tv_getandroidId);
         tv_getproducer = (TextView) findViewById(R.id.tv_getproducer);
         tv_gettype = (TextView) findViewById(R.id.tv_gettype);
+
+        myview = (MyView)findViewById(R.id.myview);
+        myview.setOnClickListener(this);
         initData();
     }
 
@@ -47,5 +55,10 @@ public class AboutDeviceActivity extends AppCompatActivity {
         Log.d(TAG,"android_id:" + putil.getAndroidID());
         Log.d(TAG,"设备厂商：" + putil.getManufacturer());
         Log.d(TAG,"设备型号" + putil.getModel());
+    }
+
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(this,SpalshActivity.class));
     }
 }

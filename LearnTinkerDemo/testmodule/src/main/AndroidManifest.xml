@@ -27,7 +27,9 @@
         <activity android:name="com.example.lee.loadWidget.Main2Activity">
 
         </activity>
-        <activity android:name="com.example.lee.SpalshActivity">
+        <activity android:name="com.example.lee.SpalshActivity"
+            android:theme="@style/weixinTheme">
+
         </activity>
         <activity android:name="com.example.lee.route.TestRouteActivity">
         </activity>

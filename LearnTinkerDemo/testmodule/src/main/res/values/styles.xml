@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/noAnimation</item>
     </style>
 
 
@@ -59,5 +60,26 @@
         <!-- 如果为 true,标签都是大写字母-->
         <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
+    <style name="weixinTheme"  parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowAnimationStyle">@style/noAnimation</item>
+        <item name="android:windowBackground">@color/text_white</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
+    <style name="noAnimation"  parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/rotate</item>
+        <item name="android:activityOpenExitAnimation">@anim/rotate</item>
+        <item name="android:activityCloseEnterAnimation">@anim/rotate</item>
+        <item name="android:activityCloseExitAnimation">@anim/rotate</item>
+        <item name="android:taskOpenEnterAnimation">@anim/rotate</item>
+        <item name="android:taskOpenExitAnimation">@anim/rotate</item>
+        <item name="android:taskCloseEnterAnimation">@anim/rotate</item>
+        <item name="android:taskCloseExitAnimation">@anim/rotate</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/rotate</item>
+        <item name="android:taskToFrontExitAnimation">@anim/rotate</item>
+        <item name="android:taskToBackEnterAnimation">@anim/rotate</item>
+        <item name="android:taskToBackExitAnimation">@anim/rotate</item>
+    </style>
 </resources>
